@@ -1,5 +1,7 @@
 FROM php:7.1-fpm-alpine
 
+WORKDIR /opt/src
+
 ENV PHPIZE_DEPS \
   autoconf \
   cmake \
