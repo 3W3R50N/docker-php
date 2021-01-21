@@ -1,7 +1,5 @@
 FROM php:7.1-fpm-alpine
 
-ARG docker_host=/sbin/ip route|awk '/default/ { print $3 }'
-
 ENV PHPIZE_DEPS \
   autoconf \
   cmake \
@@ -48,5 +46,8 @@ RUN set -x && \
     xsl \
     zip \  
   && rm /var/cache/apk/*
-  && mkdir ~/.ssh
-  && ssh-keyscan -H $docker_host >> ~/.ssh/known_hosts
+
+COPY ./run.sh /opt/src/run.sh
+RUN chmod 755 /opt/src/run.sh
+
+CMD ["/opt/src/run.sh"]
